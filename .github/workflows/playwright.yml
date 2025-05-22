@@ -21,9 +21,30 @@ jobs:
       - name: Ensure browsers are installed
         run: python -m playwright install --with-deps
       - name: Run your tests
-        run: pytest -s -v --alluredir=D:\PythonProjects\TrainingAutotests\my_reports
+        run: pytest -s -v
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: allure_report
-          path: D:\PythonProjects\TrainingAutotests\my_reports
+          path: reports/
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+      - uses: simple-elf/allure-report-action@master
+        if: always()
+        id: allure-report
+        with:
+          allure_results: reports
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+      - uses: peaceiris/actions-gh-pages@v2
+        if: always()
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
