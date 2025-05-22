@@ -1,7 +1,0 @@
-**/allure-report/
-**/my_reports/
-**/venv/
-**/__pycache__/
-**/pages/__pycache__/
-.venv
-.idea
