@@ -21,12 +21,12 @@ jobs:
       - name: Ensure browsers are installed
         run: python -m playwright install --with-deps
       - name: Run your tests
-        run: pytest -s -v
+        run: pytest -s -v --alluredir=D:\PythonProjects\TrainingAutotests\my_reports
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: allure_report
-          path: reports/
+          path: D:\PythonProjects\TrainingAutotests\my_reports
       - name: Get Allure history
         uses: actions/checkout@v2
         if: always()
