@@ -11,7 +11,7 @@ def test_login_failure(login_page):
     with allure.step('Ввести в форму авторизации недействительные учетные данные'):
         login_page.login('invalid_user', 'invalid_password')
     with allure.step('Отображается ошибка - Invalid credentials. Please try again.'):
-        assert login_page.get_error_message() == 'Invalid credentials. Please try agai.'
+        assert login_page.get_error_message() == 'Invalid credentials. Please try again.'
 
 @allure.epic('Какой-то тестовый эпик')
 @allure.feature('Авторизация')
